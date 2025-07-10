@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files (CREDENCIALES .env)
 .env*
+!.env.example  # Opcional para subir template template de ejemplo
 
 # vercel
 .vercel
@@ -39,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Archivos específicos del proyecto (añadidos)
+.gemini_cache/  # Si usas caché local de Gemini
+.idea/  # Si usas JetBrains IDE
+.vscode/  # Configuraciones locales de VSCode
+*.local  # Archivos locales (ej: config.local.json)

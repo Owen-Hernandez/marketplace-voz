@@ -1,10 +1,12 @@
 ﻿import { useState, useEffect } from 'react';
 import { supabase, buscarProductos } from '../lib/supabase';
+import { simpleGeminiCall } from '../lib/gemini';
 
 export default function Home() {
   const [productos, setProductos] = useState([]);
   const [productosOriginales, setProductosOriginales] = useState([]);
   const [transcript, setTranscript] = useState('');
+  const [respuestaGemini, setRespuestaGemini] = useState(''); // Nuevo estado
   const [cargando, setCargando] = useState(false);
 
   // Cargar productos iniciales
@@ -20,7 +22,7 @@ export default function Home() {
   }, []);
 
   // Buscar por voz
-  const iniciarVoz = () => {
+  const iniciarVoz = async () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'es-ES';
     
@@ -28,6 +30,13 @@ export default function Home() {
       const texto = event.results[0][0].transcript;
       setTranscript(texto);
       setCargando(true);
+      
+      // Llamada a Gemini
+      const respuesta = await simpleGeminiCall(texto);
+      setRespuestaGemini(respuesta); // Guardar respuesta
+      console.log('Respuesta Gemini:', respuesta);
+      
+      // Filtrado original
       const resultados = await buscarProductos(texto);
       setProductos(resultados);
       setCargando(false);
@@ -39,6 +48,7 @@ export default function Home() {
   const limpiarFiltros = () => {
     setProductos(productosOriginales);
     setTranscript('');
+    setRespuestaGemini(''); // Limpiar también la respuesta
   };
 
   return (
@@ -67,6 +77,12 @@ export default function Home() {
       {transcript && (
         <div className="mensaje-voz">
           Buscando: "{transcript}"
+        </div>
+      )}
+
+      {respuestaGemini && (
+        <div className="mensaje-gemini">
+          🎤 <strong>Asistente:</strong> {respuestaGemini}
         </div>
       )}
 

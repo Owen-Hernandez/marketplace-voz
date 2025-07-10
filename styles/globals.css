@@ -120,3 +120,35 @@ body {
     transition: all 0.3s ease;
   }
 }
+
+/* ESTILOS PARA GEMINI */
+
+.mensaje-gemini {
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 4px;
+  color: #2e7d32;
+  animation: fadeIn 0.5s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mensaje-gemini strong {
+  color: #1b5e20;
+}
+
+/* Efecto de voz activa */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.boton-voz:disabled::before {
+  content: "🎤";
+  margin-right: 5px;
+  animation: pulse 1.5s infinite;
+}
