@@ -1,154 +1,249 @@
-﻿/* Estilos base */
+﻿/* Estilos base - Tema claro moderno con acentos vibrantes */
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
+  font-family: 'Inter', Arial, sans-serif;
+  padding: 24px;
   line-height: 1.6;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
   margin: 0;
+  color: #2d3748;
 }
 
-/* Contenedor de botones */
+div > h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1e40af; /* Color azul del esquema que te gusta */
+  margin: 0 auto 2rem;
+  padding: 0;
+  animation: titleEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación suave de entrada */
+@keyframes titleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contenedor de botones - Estilo moderno */
 .contenedor-botones {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* Botón de voz */
+/* Botón de voz - Diseño más sofisticado */
 .boton-voz {
-  background: #4285f4;
+  background: linear-gradient(135deg, #4361ee, #3a0ca3);
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 24px;
+  padding: 14px 24px;
+  border-radius: 50px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  min-width: 180px;
+  justify-content: center;
 }
 
 .boton-voz:hover {
-  background: #3367d6;
+  background: linear-gradient(135deg, #3a0ca3, #4361ee);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .boton-voz:disabled {
-  background: #cccccc;
+  background: #e2e8f0;
+  color: #94a3b8;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-/* Botón limpiar */
+/* Botón limpiar - Estilo actualizado */
 .boton-limpiar {
-  background: #f44336;
+  background: linear-gradient(135deg, #ef476f, #d90429);
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 24px;
+  padding: 14px 24px;
+  border-radius: 50px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-width: 180px;
+  justify-content: center;
 }
 
 .boton-limpiar:hover {
-  background: #d32f2f;
+  background: linear-gradient(135deg, #d90429, #ef476f);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Mensaje de voz */
+/* Mensajes - Diseño más pulido */
 .mensaje-voz {
-  background: #e3f2fd;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  color: #1976d2;
+  background: #e0f2fe;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 20px 0;
+  color: #0369a1;
   animation: fadeIn 0.5s;
+  border-left: 4px solid #0ea5e9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Grid de productos */
-.productos-container {
+.mensaje-gemini {
+  background: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 12px;
+  color: #166534;
+  animation: fadeIn 0.5s;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Tarjetas */
+.mensaje-gemini strong {
+  color: #15803d;
+  font-weight: 600;
+}
+
+/* Productos - Tarjetas más elegantes */
+.productos-container {
+  display: grid;
+  gap: 24px;
+  margin-top: 32px;
+}
+
 .producto-card {
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.producto-recomendado {
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  transform: scale(1.02);
+  background-color: #f8fafc;
+  position: relative;
+}
+
+.producto-recomendado::after {
+  content: "★ Recomendado";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #3b82f6;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 50px;
 }
 
 .producto-card h3 {
   margin-top: 0;
-  color: #333;
+  color: #1e40af;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
 .precio {
-  color: #2a8f2a;
+  color: #166534;
   font-weight: bold;
-  margin-bottom: 0;
+  font-size: 1.25rem;
+  margin: 12px 0 8px;
 }
 
-/* Grid Responsive */
+/* Animaciones mejoradas */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.boton-voz:disabled::before {
+  content: "🎤";
+  margin-right: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+/* Contexto RAG - Estilo actualizado */
+.mensaje-contexto {
+  font-size: 0.85rem;
+  color: #365314;
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ecfccb;
+  padding: 8px 14px;
+  border-radius: 50px;
+  animation: fadeIn 0.5s;
+  font-weight: 500;
+}
+
+.mensaje-contexto::before {
+  content: "🔍";
+}
+
+/* Responsive - Mejoras en espaciado */
 @media (min-width: 768px) {
   .productos-container {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 28px;
+  }
+  
+  .producto-card {
+    padding: 24px;
   }
 }
 
 @media (min-width: 1024px) {
   .productos-container {
     grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  
+  .contenedor-botones {
+    justify-content: flex-start;
   }
 }
 
-/* Efecto hover */
 @media (hover: hover) {
   .producto-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    transform: translateY(-6px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   }
-}
-
-/* ESTILOS PARA GEMINI */
-
-.mensaje-gemini {
-  background: #e8f5e9;
-  border-left: 4px solid #4caf50;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 4px;
-  color: #2e7d32;
-  animation: fadeIn 0.5s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.mensaje-gemini strong {
-  color: #1b5e20;
-}
-
-/* Efecto de voz activa */
-@keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
-}
-
-.boton-voz:disabled::before {
-  content: "🎤";
-  margin-right: 5px;
-  animation: pulse 1.5s infinite;
+  
+  .producto-recomendado:hover {
+    transform: scale(1.03) translateY(-6px);
+  }
 }

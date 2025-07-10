@@ -6,8 +6,9 @@ export default function Home() {
   const [productos, setProductos] = useState([]);
   const [productosOriginales, setProductosOriginales] = useState([]);
   const [transcript, setTranscript] = useState('');
-  const [respuestaGemini, setRespuestaGemini] = useState(''); // Nuevo estado
+  const [respuestaGemini, setRespuestaGemini] = useState('');
   const [cargando, setCargando] = useState(false);
+  const [productosRecomendados, setProductosRecomendados] = useState([]);
 
   // Cargar productos iniciales
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Home() {
     cargarProductos();
   }, []);
 
-  // Buscar por voz
+  // Buscar por voz (mejorado para recomendaciones)
   const iniciarVoz = async () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'es-ES';
@@ -31,14 +32,23 @@ export default function Home() {
       setTranscript(texto);
       setCargando(true);
       
-      // Llamada a Gemini
-      const respuesta = await simpleGeminiCall(texto);
-      setRespuestaGemini(respuesta); // Guardar respuesta
-      console.log('Respuesta Gemini:', respuesta);
+      // 1. Obtener respuesta contextual de Gemini
+      const respuesta = await simpleGeminiCall(texto, productosOriginales);
+      setRespuestaGemini(respuesta);
+
+      // 2. Extraer productos mencionados en la respuesta
+      const productosFiltrados = productosOriginales.filter(producto => 
+        respuesta.toLowerCase().includes(producto.nombre.toLowerCase())
+      );
+      setProductosRecomendados(productosFiltrados);
+
+      // 3. Mostrar productos recomendados o filtrados por texto
+      setProductos(
+        productosFiltrados.length > 0 
+          ? productosFiltrados 
+          : await buscarProductos(texto)
+      );
       
-      // Filtrado original
-      const resultados = await buscarProductos(texto);
-      setProductos(resultados);
       setCargando(false);
     };
     recognition.start();
@@ -47,8 +57,9 @@ export default function Home() {
   // Limpiar filtros
   const limpiarFiltros = () => {
     setProductos(productosOriginales);
+    setProductosRecomendados([]);
     setTranscript('');
-    setRespuestaGemini(''); // Limpiar también la respuesta
+    setRespuestaGemini('');
   };
 
   return (
@@ -91,7 +102,12 @@ export default function Home() {
       <div className="productos-container">
         {productos.length > 0 ? (
           productos.map((producto) => (
-            <div key={producto.id} className="producto-card">
+            <div 
+              key={producto.id} 
+              className={`producto-card ${
+                productosRecomendados.some(p => p.id === producto.id) ? 'producto-recomendado' : ''
+              }`}
+            >
               <h3>{producto.nombre}</h3>
               <p>{producto.descripcion}</p>
               <p className="precio">${producto.precio.toFixed(2)}</p>
