@@ -2,7 +2,7 @@
 import { supabase, buscarProductos } from '../lib/supabase';
 import { simpleGeminiCall } from '../lib/gemini';
 import { AsistenteVoz } from '../lib/asistenteVoz';
-
+  
 // Instancia global del asistente
 const asistente = new AsistenteVoz();
 
@@ -14,7 +14,7 @@ export default function Home() {
   const [cargando, setCargando] = useState(false);
   const [productosRecomendados, setProductosRecomendados] = useState([]);
 
-  // Cargar productos iniciales (sin cambios)
+  // Cargar productos
   useEffect(() => {
     async function cargarProductos() {
       setCargando(true);
@@ -26,18 +26,18 @@ export default function Home() {
     cargarProductos();
   }, []);
 
-  // Buscar por voz (versión mejorada con AsistenteVoz)
+  // Buscar por voz
   const iniciarVoz = async () => {
     setCargando(true);
     
     asistente.iniciarEscucha(async (texto) => {
       setTranscript(texto);
       
-      // 1. Mantén tu lógica existente de Gemini
+      // 1. lógica existente de Gemini
       const respuesta = await simpleGeminiCall(texto, productosOriginales);
       setRespuestaGemini(respuesta);
 
-      // 2. Filtrado de productos (sin cambios)
+      // 2. Filtrado de productos
       const productosFiltrados = productosOriginales.filter(producto => 
         respuesta.toLowerCase().includes(producto.nombre.toLowerCase())
       );
@@ -54,7 +54,7 @@ export default function Home() {
     });
   };
 
-  // Limpiar filtros (con detención del asistente)
+  // Limpiar filtros
   const limpiarFiltros = () => {
     asistente.detenerEscucha();
     setProductos(productosOriginales);

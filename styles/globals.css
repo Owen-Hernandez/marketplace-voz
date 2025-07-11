@@ -1,4 +1,4 @@
-﻿/* ===== BASE FUTURISTA ===== */
+﻿/* ===== ESTILOS BASE ===== */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   padding: 0;
@@ -47,7 +47,7 @@ div > h1::after {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ===== BOTONES FUTURISTAS ===== */
+/* ===== BOTONES ===== */
 .contenedor-botones {
   display: flex;
   gap: 1rem;
@@ -174,7 +174,7 @@ div > h1::after {
   font-weight: 600;
 }
 
-/* ===== TARJETAS DE PRODUCTOS NEON ===== */
+/* ===== TARJETAS DE PRODUCTOS CON NEON ===== */
 .productos-container {
   display: grid;
   gap: 2rem;
@@ -313,7 +313,7 @@ div > h1::after {
   animation: pulse 1.5s infinite;
 }
 
-/* ===== INDICADOR DE CARGA FUTURISTA ===== */
+/* ===== INDICADOR DE CARGA ===== */
 .cargando {
   text-align: center;
   margin: 3rem 0;
