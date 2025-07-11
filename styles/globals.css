@@ -1,29 +1,267 @@
-﻿/* Estilos base - Tema claro moderno con acentos vibrantes */
+﻿/* ===== BASE FUTURISTA ===== */
 body {
-  font-family: 'Inter', Arial, sans-serif;
-  padding: 24px;
-  line-height: 1.6;
-  background-color: #f8f9fa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 0;
   margin: 0;
-  color: #2d3748;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #e2e8f0;
+  min-height: 100vh;
+  line-height: 1.7;
 }
 
 div > h1 {
   text-align: center;
-  font-size: 2.5rem;
-  color: #1e40af; /* Color azul del esquema que te gusta */
-  margin: 0 auto 2rem;
+  font-size: 3rem;
+  background: linear-gradient(90deg, #818cf8 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 2rem auto;
   padding: 0;
-  animation: titleEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+  position: relative;
+  letter-spacing: 1px;
 }
 
-/* Animación suave de entrada */
+div > h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 3px;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== BOTONES FUTURISTAS ===== */
+.contenedor-botones {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.boton-voz {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.boton-voz::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.boton-voz:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.boton-voz:hover::before {
+  opacity: 1;
+}
+
+.boton-voz:disabled {
+  background: #334155;
+  color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.boton-limpiar {
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.boton-limpiar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.boton-limpiar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+}
+
+.boton-limpiar:hover::before {
+  opacity: 1;
+}
+
+/* ===== MENSAJES HOLOGRÁFICOS ===== */
+.mensaje-voz {
+  background: rgba(30, 58, 138, 0.2);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  color: #93c5fd;
+  animation: fadeIn 0.5s;
+  border-left: 4px solid #3b82f6;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.mensaje-gemini {
+  background: rgba(22, 101, 52, 0.2);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  color: #86efac;
+  animation: fadeIn 0.5s;
+  border-left: 4px solid #22c55e;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+}
+
+.mensaje-gemini strong {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* ===== TARJETAS DE PRODUCTOS NEON ===== */
+.productos-container {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.producto-card {
+  background: rgba(30, 41, 59, 0.7);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.producto-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  background-size: 200% 200%;
+  z-index: -1;
+  border-radius: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.producto-card:hover::before {
+  opacity: 0.7;
+  animation: gradientBorder 3s ease infinite;
+}
+
+.producto-recomendado {
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transform: scale(1.02);
+  background: rgba(30, 64, 175, 0.2);
+}
+
+.producto-recomendado::before {
+  opacity: 1;
+}
+
+.producto-card h3 {
+  margin-top: 0;
+  color: #e0e7ff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.producto-descripcion {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.precio {
+  color: #86efac;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.badge-recomendado {
+  display: inline-block;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* ===== ANIMACIONES FUTURISTAS ===== */
 @keyframes titleEntrance {
   0% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
   100% {
     opacity: 1;
@@ -31,219 +269,108 @@ div > h1 {
   }
 }
 
-/* Contenedor de botones - Estilo moderno */
-.contenedor-botones {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* Botón de voz - Diseño más sofisticado */
-.boton-voz {
-  background: linear-gradient(135deg, #4361ee, #3a0ca3);
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  min-width: 180px;
-  justify-content: center;
-}
-
-.boton-voz:hover {
-  background: linear-gradient(135deg, #3a0ca3, #4361ee);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.boton-voz:disabled {
-  background: #e2e8f0;
-  color: #94a3b8;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Botón limpiar - Estilo actualizado */
-.boton-limpiar {
-  background: linear-gradient(135deg, #ef476f, #d90429);
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  min-width: 180px;
-  justify-content: center;
-}
-
-.boton-limpiar:hover {
-  background: linear-gradient(135deg, #d90429, #ef476f);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Mensajes - Diseño más pulido */
-.mensaje-voz {
-  background: #e0f2fe;
-  padding: 16px;
-  border-radius: 12px;
-  margin: 20px 0;
-  color: #0369a1;
-  animation: fadeIn 0.5s;
-  border-left: 4px solid #0ea5e9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.mensaje-gemini {
-  background: #f0fdf4;
-  border-left: 4px solid #22c55e;
-  padding: 18px;
-  margin: 20px 0;
-  border-radius: 12px;
-  color: #166534;
-  animation: fadeIn 0.5s;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.mensaje-gemini strong {
-  color: #15803d;
-  font-weight: 600;
-}
-
-/* Productos - Tarjetas más elegantes */
-.productos-container {
-  display: grid;
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.producto-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.producto-recomendado {
-  border: 2px solid #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-  transform: scale(1.02);
-  background-color: #f8fafc;
-  position: relative;
-}
-
-.producto-recomendado::after {
-  content: "★ Recomendado";
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #3b82f6;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 50px;
-}
-
-.producto-card h3 {
-  margin-top: 0;
-  color: #1e40af;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.precio {
-  color: #166534;
-  font-weight: bold;
-  font-size: 1.25rem;
-  margin: 12px 0 8px;
-}
-
-/* Animaciones mejoradas */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
+  0% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .boton-voz:disabled::before {
   content: "🎤";
-  margin-right: 8px;
+  margin-right: 0.5rem;
   animation: pulse 1.5s infinite;
 }
 
-/* Contexto RAG - Estilo actualizado */
-.mensaje-contexto {
-  font-size: 0.85rem;
-  color: #365314;
-  margin-top: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #ecfccb;
-  padding: 8px 14px;
-  border-radius: 50px;
-  animation: fadeIn 0.5s;
-  font-weight: 500;
+/* ===== INDICADOR DE CARGA FUTURISTA ===== */
+.cargando {
+  text-align: center;
+  margin: 3rem 0;
 }
 
-.mensaje-contexto::before {
-  content: "🔍";
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  border-top-color: #3b82f6;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+  position: relative;
 }
 
-/* Responsive - Mejoras en espaciado */
+.spinner::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #8b5cf6;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
 @media (min-width: 768px) {
   .productos-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-  }
-  
-  .producto-card {
-    padding: 24px;
   }
 }
 
 @media (min-width: 1024px) {
   .productos-container {
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
   }
   
-  .contenedor-botones {
-    justify-content: flex-start;
+  div > h1 {
+    font-size: 3.5rem;
   }
 }
 
 @media (hover: hover) {
   .producto-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   }
   
   .producto-recomendado:hover {
-    transform: scale(1.03) translateY(-6px);
+    transform: scale(1.03) translateY(-5px);
   }
 }

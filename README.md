@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+DOCUMENTACION
 
-## Getting Started
+Marketplace interactivo con asistente de voz AI para búsqueda y recomendación de productos, implementando las tecnologías requeridas: Supabase, Gemini Live y RAG.
 
-First, run the development server:
+Tecnologías Implementadas
+Tecnología	Uso	Versión
+Lovable	Framework frontend	-
+Supabase	Backend/BBDD + Vector Embeddings	v2.0+
+Gemini Live	Procesamiento de voz y respuestas AI	v1.5-flash
+pgvector	Almacenamiento de embeddings	v0.5+
+React	Gestión de estado/interfaz	18.2+
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Estructura de Archivos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+MARKETPLACE-VOZ/
+│
+├── lib/
+│   ├── gemini.js               # Conexión con Gemini API
+│   ├── supabase.js             # Configuración Supabase
+│   └── asistenteVoz.js         # Lógica de voz
+│
+├── pages/
+│   ├── _app.js                 # Inicialización de la app
+│   └── index.js                # Página principal (UI)
+│
+├── styles/
+│   └── globals.css             # Todos los estilos
+│
+├── .env.local                  # Variables de entorno (TODAS LAS KEYS)
+└── README.md                   # Este archivo
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Instalación
+npm install @google/generative-ai @supabase/supabase-js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Sistema RAG (Retrieval-Augmented Generation)
+Qué hace:
+Combina búsqueda semántica con generación de respuestas contextuales.
 
-## Learn More
+Cómo funciona:
 
-To learn more about Next.js, take a look at the following resources:
+Generación de Embeddings:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Convierte descripciones de productos en vectores numéricos (usando text-embedding-3-small)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Almacena en Supabase
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Gemini recibe:
+"Basado en estos productos: [JSON de productos relevantes]  
+ Responde la pregunta: '¿Qué cámara recomiendan para viajes?'"

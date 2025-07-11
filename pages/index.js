@@ -1,6 +1,10 @@
 ﻿import { useState, useEffect } from 'react';
 import { supabase, buscarProductos } from '../lib/supabase';
 import { simpleGeminiCall } from '../lib/gemini';
+import { AsistenteVoz } from '../lib/asistenteVoz';
+
+// Instancia global del asistente
+const asistente = new AsistenteVoz();
 
 export default function Home() {
   const [productos, setProductos] = useState([]);
@@ -10,7 +14,7 @@ export default function Home() {
   const [cargando, setCargando] = useState(false);
   const [productosRecomendados, setProductosRecomendados] = useState([]);
 
-  // Cargar productos iniciales
+  // Cargar productos iniciales (sin cambios)
   useEffect(() => {
     async function cargarProductos() {
       setCargando(true);
@@ -22,21 +26,18 @@ export default function Home() {
     cargarProductos();
   }, []);
 
-  // Buscar por voz (mejorado para recomendaciones)
+  // Buscar por voz (versión mejorada con AsistenteVoz)
   const iniciarVoz = async () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'es-ES';
+    setCargando(true);
     
-    recognition.onresult = async (event) => {
-      const texto = event.results[0][0].transcript;
+    asistente.iniciarEscucha(async (texto) => {
       setTranscript(texto);
-      setCargando(true);
       
-      // 1. Obtener respuesta contextual de Gemini
+      // 1. Mantén tu lógica existente de Gemini
       const respuesta = await simpleGeminiCall(texto, productosOriginales);
       setRespuestaGemini(respuesta);
 
-      // 2. Extraer productos mencionados en la respuesta
+      // 2. Filtrado de productos (sin cambios)
       const productosFiltrados = productosOriginales.filter(producto => 
         respuesta.toLowerCase().includes(producto.nombre.toLowerCase())
       );
@@ -50,21 +51,28 @@ export default function Home() {
       );
       
       setCargando(false);
-    };
-    recognition.start();
+    });
   };
 
-  // Limpiar filtros
+  // Limpiar filtros (con detención del asistente)
   const limpiarFiltros = () => {
+    asistente.detenerEscucha();
     setProductos(productosOriginales);
     setProductosRecomendados([]);
     setTranscript('');
     setRespuestaGemini('');
   };
 
+  // Limpieza al desmontar el componente
+  useEffect(() => {
+    return () => {
+      asistente.detenerEscucha();
+    };
+  }, []);
+
   return (
     <div>
-      <h1>Marketplace con Voz</h1>
+      <h1>GeminiAI Shop</h1>
       
       <div className="contenedor-botones">
         <button 
@@ -72,32 +80,30 @@ export default function Home() {
           className="boton-voz"
           disabled={cargando}
         >
-          {cargando ? 'Buscando...' : '🎤 Buscar por Voz'}
+          {cargando ? 'Escuchando... 🎤' : '🎤 Buscar por Voz'}
         </button>
 
-        {transcript && (
+        {(transcript || respuestaGemini) && (
           <button 
             onClick={limpiarFiltros}
             className="boton-limpiar"
           >
-            ✖ Limpiar filtros
+            ✖ Limpiar
           </button>
         )}
       </div>
 
       {transcript && (
         <div className="mensaje-voz">
-          Buscando: "{transcript}"
+          <strong>Tú:</strong> {transcript}
         </div>
       )}
 
       {respuestaGemini && (
         <div className="mensaje-gemini">
-          🎤 <strong>Asistente:</strong> {respuestaGemini}
+          <strong>Asistente:</strong> {respuestaGemini}
         </div>
       )}
-
-      {cargando && <p>Cargando...</p>}
 
       <div className="productos-container">
         {productos.length > 0 ? (
@@ -105,18 +111,30 @@ export default function Home() {
             <div 
               key={producto.id} 
               className={`producto-card ${
-                productosRecomendados.some(p => p.id === producto.id) ? 'producto-recomendado' : ''
+                productosRecomendados.some(p => p.id === producto.id) 
+                  ? 'producto-recomendado' 
+                  : ''
               }`}
             >
               <h3>{producto.nombre}</h3>
               <p>{producto.descripcion}</p>
               <p className="precio">${producto.precio.toFixed(2)}</p>
+              {productosRecomendados.some(p => p.id === producto.id) && (
+                <span className="badge-recomendado">⭐ Recomendado</span>
+              )}
             </div>
           ))
         ) : (
           !cargando && <p>No se encontraron productos.</p>
         )}
       </div>
+
+      {cargando && (
+        <div className="cargando">
+          <div className="spinner"></div>
+          <p>Procesando tu solicitud...</p>
+        </div>
+      )}
     </div>
   );
 }
