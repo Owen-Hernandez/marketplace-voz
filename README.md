@@ -46,4 +46,4 @@ Almacena en Supabase
 
 Gemini recibe:
 "Basado en estos productos: [JSON de productos relevantes]  
- Responde la pregunta: '¿Qué cámara recomiendan para viajes?'"
+ Responde la pregunta: '¿Recomiendame una consola de videojuegos portatil'"
